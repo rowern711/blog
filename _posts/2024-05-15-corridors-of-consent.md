@@ -5,10 +5,7 @@ pillar: policy
 topics:
   - civics
   - governance
-tags:
-  - policy
-  - civics
-  - governance
+  - freedom
 ---
 
 Policy is a hallway lined with doors. Every clause is a hinge, waiting for public consent to turn it. We tend to praise the architects and forget the locksmiths.

@@ -5,10 +5,7 @@ pillar: philosophy
 topics:
   - ethics
   - language
-tags:
-  - philosophy
-  - ethics
-  - language
+  - virtue
 ---
 
 Philosophy begins when the room falls silent enough for questions to breathe. In that hush, ethics and language share a table; words negotiate the conditions under which they may be trusted.
