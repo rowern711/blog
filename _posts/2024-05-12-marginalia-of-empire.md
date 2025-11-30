@@ -5,10 +5,7 @@ pillar: history
 topics:
   - archives
   - memory
-tags:
-  - history
-  - archives
-  - memory
+  - sovereignty
 ---
 
 The annals of empire read like a palimpsest. Each decree overwrites the last, yet faint notes linger beneath. In the margins of a faded ledger, a clerk wondered aloud whether victory could be accounted alongside salt and wine.

@@ -1,56 +1,46 @@
 ---
 layout: default
 ---
-<article class="post">
-  <header class="post-header">
-    <p class="post-pillar">{{ page.pillar | capitalize }}</p>
-    <h1>{{ page.title }}</h1>
-    <p class="post-date">{{ page.date | date: '%B %d, %Y' }}</p>
-    {% if page.header_image %}
-    <figure class="post-figure">
-      <img src="{{ page.header_image | relative_url }}" alt="">
-    </figure>
-    {% endif %}
-  </header>
-  <div class="post-body">
+<article class="entry post">
+  <h1>{{ page.title }}</h1>
+  <p class="author">{{ page.date | date: '%B %d, %Y' }} &mdash; {{ page.pillar | upcase }}</p>
+  <div class="entrywrap">
     {{ content }}
   </div>
-  <section class="post-meta-block" aria-label="Post tags">
-    <div class="tag-row">
-      <span class="tag-pill">{{ page.pillar | capitalize }}</span>
+  <div class="post-tags">
+    <strong>{{ page.pillar | upcase }}</strong>
+    {% if page.topics %}
+      &middot;
       {% for topic in page.topics %}
-      <span class="tag-pill">{{ topic }}</span>
+        <a href="{{ '/topic/' | append: topic | append: '/' | relative_url }}">{{ topic }}</a>{% unless forloop.last %}, {% endunless %}
       {% endfor %}
-    </div>
-  </section>
-  <section class="related-posts" aria-labelledby="related-heading">
-    <h2 id="related-heading">Related reading</h2>
-    <div class="related-grid">
-      {% assign related = site.posts | where: 'pillar', page.pillar %}
-      {% assign shared_topics = '' | split: '' %}
-      {% for t in page.topics %}
-        {% assign shared_topics = shared_topics | push: t %}
-      {% endfor %}
-      {% for post in site.posts %}
-        {% if post.url != page.url %}
-          {% for topic in shared_topics %}
-            {% if post.topics contains topic %}
-              {% assign related = related | push: post %}
-            {% endif %}
-          {% endfor %}
-        {% endif %}
-      {% endfor %}
-      {% assign related = related | uniq | where_exp: 'p','p.url != page.url' | slice: 0, 4 %}
+    {% endif %}
+  </div>
+</article>
+<section class="entry related" aria-labelledby="related-heading">
+  <h2 id="related-heading">Related posts</h2>
+  <div class="related-grid">
+    {% assign related = site.posts | where: 'pillar', page.pillar %}
+    {% for post in site.posts %}
+      {% if post.url != page.url %}
+        {% for topic in page.topics %}
+          {% if post.topics contains topic %}
+            {% assign related = related | push: post %}
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+    {% endfor %}
+    {% assign related = related | uniq | where_exp: 'p','p.url != page.url' | sort: 'date' | reverse | slice: 0, 5 %}
+    {% if related.size > 0 %}
       {% for post in related %}
       <article class="related-card">
-        <p class="related-pill">{{ post.pillar | capitalize }}</p>
+        <p class="author">{{ post.pillar | upcase }}</p>
         <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
-        <p class="related-date">{{ post.date | date: '%b %d, %Y' }}</p>
+        <p class="post-date">{{ post.date | date: '%b %d, %Y' }}</p>
       </article>
       {% endfor %}
-      {% if related == empty %}
-      <p class="related-empty">No close neighbors yet.</p>
-      {% endif %}
-    </div>
-  </section>
-</article>
+    {% else %}
+      <p class="description">No close neighbors yet.</p>
+    {% endif %}
+  </div>
+</section>

@@ -5,10 +5,7 @@ pillar: theology
 topics:
   - contemplation
   - ritual
-tags:
-  - theology
-  - contemplation
-  - ritual
+  - mercy
 ---
 
 Evening prayers resemble the turning of thin pages. Each inhale is a petition; each exhale, an amen. Theology is the art of noticing how breath patterns become shared ritual.
