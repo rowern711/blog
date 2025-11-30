@@ -1,0 +1,26 @@
+---
+layout: default
+---
+<section class="entry archive">
+  <h1>{{ page.title }}</h1>
+  <p>Posts filed under {{ page.pillar | capitalize }}.</p>
+  <div class="archive-list">
+    {% assign filtered = site.posts | where: 'pillar', page.pillar | sort: 'date' | reverse %}
+    {% for post in filtered %}
+    <article class="archive-row" data-pillar="{{ post.pillar }}" data-topics="{{ post.topics | join: ',' }}">
+      <h2><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
+      <p class="author">{{ post.date | date: '%B %d, %Y' }} &mdash; {{ post.pillar | capitalize }}</p>
+      <p class="post-excerpt">{{ post.excerpt | strip_html | truncate: 180 }}</p>
+      <div class="post-tags">
+        <strong>{{ post.pillar | upcase }}</strong>
+        {% if post.topics %}
+          &middot;
+          {% for topic in post.topics %}
+            <a href="{{ '/topic/' | append: topic | append: '/' | relative_url }}">{{ topic }}</a>{% unless forloop.last %}, {% endunless %}
+          {% endfor %}
+        {% endif %}
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+</section>

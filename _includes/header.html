@@ -1,0 +1,11 @@
+<header id="header">
+  <nav id="navigation_box" aria-label="Primary">
+    <div id="left_navigation_box">
+      {% for link in site.navigation_links %}
+      <a href="{{ link.url | relative_url }}">{{ link.label }}</a>
+      {% endfor %}
+    </div>
+  </nav>
+  <h1><a href="{{ '/' | relative_url }}">{{ site.title }}</a></h1>
+  <p class="tagline">{{ site.description }}</p>
+</header>
